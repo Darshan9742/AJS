@@ -1,0 +1,11 @@
+<!-- ng-bind is one way bind [from controller to view]
+    and ng-model is two way bind -->
+<html>
+    <body>
+        <div>
+            Name : <span ng-bind="s.name"></span>
+            Price : <span ng-bind="s.price"></span> 
+            Percentage change : <span ng-bind="getChange(s) + '%'"></span>
+        </div>
+    </body>
+</html>

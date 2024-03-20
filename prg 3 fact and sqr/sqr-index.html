@@ -1,0 +1,37 @@
+<!--Develop a angular js program to compute factorial and square based on input number-->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="fact_and_sqr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorial_and_square</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="data">
+        Enter the number : <input type="number" ng-model="num">
+        <br><br>
+        <button ng-click="fact()">Calculate Factorial</button>
+        <button ng-click="sqr()">Calculate Square</button>
+        <h3>Factorial : {{factorial}}</h3>
+        <h3>Square : {{square}}</h3>
+    </div>
+    <script>
+        let a = angular.module("fact_and_sqr",[]).controller("data",function($scope){
+            $scope.fact = function(){
+                let number=$scope.num;
+                let result=1;
+                while(number>0){
+                    result=result*(number);
+                    number=number-1;
+                }
+                $scope.factorial=result;
+            };
+            $scope.sqr = function(){
+                $scope.square = $scope.num * $scope.num;
+            };
+        });
+    </script>
+</body>
+</html>

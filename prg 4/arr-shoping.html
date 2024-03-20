@@ -1,0 +1,38 @@
+<!--This prg expalins us arrays-->
+<!-- display shopping items by allowing user to add and remove items using controllers -->
+<!-- $index keeps track of curent index -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="shopping">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping cart</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div class="main" ng-controller="data">
+        <table>
+            <tr ng-repeat="i in shoppingList">
+                <td><p>{{i}}</p></td>
+                <td><button ng-click="remove($index)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-delete"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path><line x1="18" y1="9" x2="12" y2="15"></line><line x1="12" y1="9" x2="18" y2="15"></line></svg></button></td>
+            </tr>
+        </table>
+        Add a item : <input type="text" ng-model="value">
+        <button ng-click="add()">Add item</button>
+    </div>
+    <script>
+        let a = angular.module("shopping",[]).controller("data",function($scope){
+            $scope.shoppingList = ["fruits","vegetables","beverages","snacks","choclates"];
+            $scope.add = function(){
+                $scope.shoppingList.push($scope.value);
+                $scope.value = "";
+            }
+            $scope.remove = function(index){
+                $scope.shoppingList.splice(index,1);
+            }
+
+        });
+    </script>
+</body>
+</html>

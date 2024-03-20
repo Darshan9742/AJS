@@ -1,0 +1,32 @@
+<!-- ng-show,ng-submit -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="form">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div class="main" ng-controller="data">
+        <form name="form_name" ng-submit="login()">
+            Username : <input type="email" ng-model="uname" ng-pattern="/^[a-z0-9]+(\.[a-z0-9]+)*@([a-z0-9]+\.)+[a-z]{2,}$/i" required/><br><br>
+            Password : <input type="password" ng-model="pswd" required/><br><br>
+            <button ng-disabled="!form_name.$valid">Login</button>
+        </form>
+    </div>
+    <script>
+        let a = angular.module("form",[]).controller("data",function($scope){
+            $scope.login = function(){
+                if($scope.uname == "darsh@gmail.com" && $scope.pswd == "123"){
+                    alert("Login successfull!!!!");
+                }
+                else{
+                    alert("Username or password is wrong");
+                }
+            }
+        });
+    </script>
+</body> 
+</html>

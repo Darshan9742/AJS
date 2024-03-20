@@ -1,0 +1,63 @@
+<!-- Develop angular program to display UGcources and Pgcources using routing and controllers -->
+
+<!-- URL : http://www.apple.com                 /first/page 
+                |this part is sent by server|   |this is done in angular js itself|  
+            
+            until .com it is loaded from server and after that /first/page is loaded at client side itself
+
+    To implement router we can use two modules
+    1)ng-Route
+    2)ui-router
+
+    steps :
+    1) <script>https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.js"></script>
+    2) ng-view 
+        <div ng-view></div>
+            or
+        <ng-view></ng-view>
+            or
+        <div class="ng-view"></div>
+    3) including ng-Route module dependency 
+        angular.module('routingapp',['ng-Router'])
+    4) routers in config section 
+                                                                                                            -->
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Routing</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.js"></script>
+    </head>
+    <body ng-app="routingapp">
+        <div>
+            <h1>Implementing Angular JS Routing </h1>
+            <div>
+                <ul>
+                    <li><a href="#!/">Default</a></li>
+                    <li><a href="#!/ug">UG Cources</a></li>
+                    <li><a href="#!/pg">PG cources</a></li>
+                    <li><a href="#!/notav">NOT available</a></li>
+                </ul>
+            </div>
+        </div>
+        <div ng-view>
+            <script>
+                let a = angular.module('routingapp',['ngRoute'])        //creating object for routing
+                a.config(['$routeProvider',function($routeProvider){    //square brackets is used to add services
+                    $routeProvider.when("/",{template:'<h2>Default Route<h2>'})
+                                .when("/ug",{templateUrl:'ug.html',controller:'UGcontroller'})
+                                .when("/pg",{templateUrl:'pg.html',controller:'PGcontroller'})
+                                .otherwise({redirectTo:"/"});
+                }]);
+                a.controller('UGcontroller',function($scope){
+                    $scope.UGcources = ['CS','IS','civil','AIML','CSBS','CSDS','Textile']
+                });
+                a.controller('PGcontroller',function($scope){
+                    $scope.PGcources = ['MBA','MCA','EE','SE']
+                });
+            </script>
+        </div>
+    </body>
+</html>

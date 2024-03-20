@@ -1,0 +1,65 @@
+<!--Prog 2: Develop simple angular js calculator which performs basic mathemetical operations(add,sub,mul,div) by accepting two numbers from user-->
+
+<!--ng-app can used in htnl tag or body tag
+"https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js", the contents of this path cannot be copied to notepad as this path contains url
+ng-contoller connects view and controller. It can be added on body tag or div tag
+ng-click is used to handel events
+[] -> can be applied angular modles to any div or body
+$script -> to access $scrpit. it acts as a inferce btw view and controler. Its also call "this" operator -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="calc">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div class="main" ng-controller="data">
+        <center><h3>Calculator</h3></center>
+        Enter 1st Number : <input type="number" ng-model="firstNumber"><br><br>
+        Enter 2nd Number : <input type="number" ng-model="secondNumber"><br><br>
+        Select the operation :
+        <select ng-model="operator">
+            <option value='+'>Addition</option>
+            <option value='-'>Substraction</option>
+            <option value='*'>Multiplication</option>
+            <option value='/'>Division</option>
+        </select>
+        <br><br>
+        <button ng-click="calculator()">Calculate</button>
+        <h3>Result = {{result}}</h3>
+    </div>
+    <script>
+        let a = angular.module("calc",[])
+        a.controller("data",function($scope){
+            $scope.calculator = function(){
+                if($scope.firstNumber && $scope.secondNumber != null){
+                    switch($scope.operator){
+                    case '+' : $scope.result = $scope.firstNumber + $scope.secondNumber;
+                                break;
+
+                    case '-' : $scope.result = $scope.firstNumber - $scope.secondNumber;
+                                break;
+
+                    case '*' : $scope.result = $scope.firstNumber * $scope.secondNumber;
+                                break;
+                                
+                    case '/' : if($scope.secondNumber == 0){
+                                    $scope.result = "Invalid input"
+                                }
+                                else{
+                                    $scope.result = $scope.firstNumber / $scope.secondNumber;
+                                    break;
+                                }
+                        }
+                }
+                else{
+                    $scope.result = "Please enter values";
+                }
+            };
+        });
+    </script>
+</body>
+</html>

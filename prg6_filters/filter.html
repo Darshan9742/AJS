@@ -1,0 +1,47 @@
+<!-- Filter Expression : {{expression|filter}} -->
+<!-- .filter, .service .control -->
+<!-- Develop angular js program to demonstarate the working of angular js filters and custom filters -->
+<!-- module is container wtih respect to view [set of conrollers, service and filters]-->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="filterapp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div class="main" ng-controller="filter">
+        <p>{{amount | number}}</p>
+        <p>{{amount | currency}}</p>
+        <p>{{amount | currency: 'INR '}}</p>
+        <p>{{name | uppercase}}</p>
+        <p>{{name | lowercase}}</p>
+        <p>{{name | uppercase | limitTo:"5"}}</p>
+        <p>{{dt | date:"dd/MM/yyyy"}}</p>
+        <!-- <p>{{date}}t</p> -->
+        <p>{{obj}}</p>
+        <p>{{country | filter:"i"}}</p>
+        <p>{{student | orderBy:"usn"}}</p>
+        <li ng-repeat="x in student | orderBy:'name'">{{x.name}}</li><br>  
+        <input type="number" ng-model="usn">
+        <p>{{usn | display}}</p>
+    </div>
+    <script>
+        let a = angular.module("filterapp",[]).controller("filter",function($scope){
+            $scope.amount = 200000;
+            $scope.name = "Miško Hevery";
+            $scope.dt = new Date("12-dec-2024");
+            $scope.obj = {name : "darshan", usn : "4BD22IS402"};
+            $scope.country = ["India","canada","Australia","japan"];
+            $scope.student = [{name : "Z",usn: "103"},{name: "B",usn:"101"},{name: "A",usn:"102"}];
+        })
+        .filter('display',function(){
+            return function(input){  //usn is input 
+                return "4BD22IS" + input;
+            }
+        }); 
+    </script>
+</body>
+</html>

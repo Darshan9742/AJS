@@ -1,0 +1,67 @@
+<!-- set of code[functions] to components is called service -->
+<!-- service is type script clas. its function or value -->
+<!-- service assures reusability of code -->
+<!-- view -> controller -> service -> -->
+<!-- ng-conctoller = "main as m" => m is object -->
+<!-- Develop angular js program to demonstrate the usage of angular js service and controllers-->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="serviceApp">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Service</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    </head>
+    <body ng-controller="main as m">
+        <button ng-click="m.open('first')">Open First</button>
+        <button ng-click="m.open('second')">Open Second</button>
+
+        <div ng-switch on="m.tab">
+            <div ng-switch-when="first" ng-controller="sub as s">
+                <h3>First Tab</h3>
+                <ul>
+                    <li ng-repeat="item in s.list()">{{item.label}}</li>
+                </ul>
+                <button ng-click="s.add()">Add more items</button>
+            </div>
+            <div ng-switch-when="second" ng-controller="sub as s">
+                <h3>Second Tab</h3>
+                <ul>
+                    <li ng-repeat="item in s.list()">{{item.label}}</li>
+                </ul>
+                <button ng-click="s.add()">Add more items</button>
+            </div>
+        </div>
+
+        <script>
+            function Itemservice(){
+                var items = [{id : 1, label : 'Item 0'},{id : 2, label : 'Item 1'}];
+                this.list = function(){
+                    return items;
+                };
+
+                this.add = function(item){
+                    items.push(item);
+                };
+            }
+            
+            angular.module('serviceApp', [])
+            .service('Itemservice',[Itemservice])       //[Itemservice] -> listing a service name in a order
+            .controller('main', function(){
+                this.tab = "first";
+                this.open = function(tab){
+                    this.tab = tab;
+                };
+            })
+            .controller('sub',["Itemservice" ,function(Itemservice){
+                this.list = function(){
+                    return Itemservice.list();
+            };
+            this.add = function(){
+                Itemservice.add({id:this.list().length+1, label:"Item"+this.list().length});
+            };
+        }]);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!-- ng-show,ng-submit -->
+<!-- form.$invalid is for form and for text box we use $error -->
+<!-- Develop angular js program To display registration page using form validation -->
+<!DOCTYPE html>
+<html lang="en" ng-app="form">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registation Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div class="main" ng-controller="data">
+        <form name="form_name" ng-submit="register()">
+            Username : <input type="text" ng-model="uname" name="u_name" ng-minlength="4" required/>
+            <span ng-show="form_name.u_name.$error.minlength">
+                Username must hav atlest 4 charaters
+            </span><br><br>
+            Password : <input type="password" name="p" ng-pattern="/[a-zA-Z]{4}[0-9][^a-zA-Z0-9]/" ng-model="pswd" required/><br>
+            <span ng-show="form_name.p.$error.pattern">
+                Password must have <li>4 charaters</li><li>1 Digit</li><li>1 special characters</li>
+            </span>
+            <br><br>
+            <button ng-disabled="form_name.$invalid">Login</button>
+        </form>
+    </div>
+    <script>
+        let a = angular.module("form",[]).controller("data",function($scope){
+            $scope.register = function(){
+                    alert("Registration successfull!!!!");
+            }
+        });
+    </script>
+</body> 
+</html>

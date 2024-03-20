@@ -1,0 +1,66 @@
+<!-- Write a angular js program to create simple CRUD[create, read, update, delete] for maniging student details -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="crud">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Details</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script></head>
+    <body>
+        <div class="main" ng-controller="data">
+            <form name="fn">
+                <input type="text" placeholder="Name" id="name" ng-model="name" required><br><br>
+                <input type="number" placeholder="Age" ng-model="age" required><br><br>
+                <input type="email" placeholder="Email" ng-model="email" required><br><br>
+                <span ng-show="f.$error.required">
+                    Enter all the details
+                </span>
+                Add all items <button ng-disabled="fn.$invalid" ng-click="add()">Add</button>
+            </form>
+            <h3>Student Details</h3>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                </tr>
+                <tr ng-repeat="s in student_list">
+                    <td>{{s.name}}</td>
+                    <td>{{s.age}}</td>
+                    <td>{{s.email}}</td>
+                    <td><button ng-click="update(s)">Update</button></td>
+                    <td><button ng-click="delete(s)">Delete</button></td>
+                </tr>
+            </table>
+            <p>Total student : {{total}}</p>
+        </div>
+        <script>
+            angular.module("crud",[]).controller("data", function($scope){
+                $scope.student_list = [{name : "darshan", age : "20", email : "darshan@gmail.com"}];
+                $scope.total = $scope.student_list.length;
+                $scope.add = function(){
+                    $scope.student_list.push({name : $scope.name, age : $scope.age, email : $scope.email});
+                    $scope.total++;
+                }
+
+                $scope.update = function(s){
+                    // document.getElementById("name").innerHTML="s.name";
+                    let index = $scope.student_list.indexOf(s);
+                    let up_name = prompt("Enter updated name",s.name);
+                    let up_age = prompt("Enter upadteed age",s.age);
+                    let up_em = prompt("Enter updated age",s.email);
+
+                    if(up_name || up_age || up_age){
+                        $scope.student_list.splice(index,1,{name : up_name, age : up_age, email : up_em})
+                    }
+                }
+
+                $scope.delete = function(s){
+                    $scope.student_list.splice(s,1);
+                    $scope.total--;
+                }
+            });
+        </script>
+    </body>
+</html>

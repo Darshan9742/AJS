@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="stocksApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocks</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="stockmarket">
+        <h1>List of stocks</h1>
+        <div ng-repeat="s in stocks">
+            <div newd></div>               <!-- this statement can also be written as <stock></stock> -->
+            <br><br>
+        </div>
+    </div>
+    <script>
+        let a = angular.module('stocksApp',[]).controller('stockmarket',function($scope){
+        $scope.stocks = [
+            {name : "MRF", price : 100, previous : 220},
+            {name : "Coca-cola", price : 140, previous : 120},
+            {name : "GTA", price : 110, previous : 110}
+            ];
+        });
+
+        a.directive('newd',function(){
+            return {
+                templateUrl:'stock.html',
+                // restrict:AE  
+                link:function($scope){
+                $scope.getChange = function(stock){
+                    return Math.ceil(((stock.price - stock.previous)/stock.previous) * 100)
+                    };
+                }
+            };
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!--Two way modle can be done with ng-model-->
+
+<html ng-app="firstapp">
+    <head>
+        <title>Angular JS</title>
+        <!-- to make mvc model we will use this below link -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    </head>
+    <body>
+        <div ng-controller="name">
+            <!-- it acts as two way binding -->
+            Enter First name
+            <input type="text" ng-model="firstTextbox">
+            <br><br>
+            Enter Last name
+            <input type="text" ng-model="secondTextbox">  
+            <br><br>
+            <button ng-click="display()">Submit</button>
+            <h1>Full name : {{fullname}}</h1>
+            <!-- <h1>Full name : {{firstTextbox+" "+secondTextbox}}</h1> -->
+        </div>
+
+        <!--This script is controller-->
+        <script>
+            let a = angular.module("firstapp",[])    // create a function with name angular.module which returns object,parameters for the function are "firstname"->name of ng-app,[]->dependency
+            a.controller("name",function($scope){
+                $scope.firstTextbox = "Harry";
+                $scope.secondTextbox = "Potter";
+            //$scope acts as this pointer, it acts as interface btw view and controller
+            
+            $scope.display = function()
+            {
+                $scope.fullname = $scope.firstTextbox+" "+$scope.secondTextbox;
+            }
+        });          
+        </script>
+    </body>
+</html>

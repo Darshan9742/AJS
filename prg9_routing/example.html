@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Routing</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.js"></script>
+</head>
+<body ng-app="routingapp">
+    <div>
+        Click below links to route the webpages 
+        <ul>
+            <li><a href="#!/">Default</a></li>
+            <li><a href="#!/ug">ug cources</a></li>
+            <li><a href="#!/pg">pg cources</a></li>
+            <li><a href="#!/notav">not exists</a></li>
+        </ul>
+    </div>
+    <div ng-view>
+        <script>
+            let a = angular.module('routingapp',['ngRoute'])
+            a.config(['$routeProvider',function($routeProvider){
+                $routeProvider.when("/",{template:'<h2>This is default</h2>'})
+                .when("/ug",{templateUrl:'ug.html',controller:'UGcontroller'})
+                .when("/pg",{templateUrl:'pg.html',controller:'PGcontroller'})
+                .otherwise({redirectTo:"/"});
+            }]);
+            a.controller('UGcontroller',function($scope){
+                $scope.UGcources = ['CS','IS','CSBS']
+            });
+            a.controller('PGcontroller',function($scope){
+                $scope.PGcources = ['MBA','MCA','EE']
+            })
+        </script>
+    </div>
+</body>
+</html>
