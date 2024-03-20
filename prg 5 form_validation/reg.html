@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="form">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="data">
+        <form name="form_name" ng-submit="register()">
+            Username : <input type="text" ng-model="uname" name="u_name" ng-minlength="4" required>
+            <span ng-show="form_name.u_name.$error.minlength">Username must have atlest 4 characters</span><br><br>
+            Password : <input type="password" name="p" ng-model="pswd" ng-pattern="/[a-zA-Z]{4}[0-9][^a-zA-Z0-9]/" required><br><br>
+            <span ng-show="form_name.p.$error.pattern"></span>
+            <button ng-disabled="form_name.$invalid">Login</button>
+        </form>
+    </div>
+    <script>
+        let a = angular.module("form",[]).controller("data",function($scope){
+            $scope.register = function(){
+                alert("REgistration Successfully!!!")
+            }
+        });
+    </script>
+</body>
+</html>

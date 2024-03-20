@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="firstapp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full name</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="data">
+        Enter first name <br><input type="text" ng-model="first_name" required><br><br>
+        Enter second name <br><input type="text" ng-model="second_name" required><br><br>
+        <button ng-click="display()">Submit</button>
+        <h2>{{fullname}}</h2>
+    </div>
+    <script>
+        angular.module('firstapp',[]).controller("data",function($scope){
+            $scope.display = function(){
+                $scope.fullname = $scope.first_name +" " +$scope.second_name
+            }
+        })
+    </script>
+</body>
+</html>

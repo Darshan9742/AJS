@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sqr-fact">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Square ad Factorial</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="data">
+        Enter a number 
+        <input type="number" ng-model="num">
+        <br><br>
+        <button ng-click="sqr()">Square</button>
+        <button ng-click="fact()">Factorial</button>
+        <h2>Square : {{square}} </h2>
+        <h2>Factorial : {{factorial}}</h2>
+    </div>
+    <script>
+        let a = angular.module("sqr-fact",[]).controller("data",
+        function($scope){
+            $scope.sqr = function (){
+                $scope.square = $scope.num * $scope.num;
+            }
+
+            $scope.fact = function (){
+                let number = $scope.num;
+                let result = 1;
+                while(number>0){
+                    result = result * number;
+                    number--;
+                }
+                $scope.factorial = result;
+            }
+        });
+    </script>
+</body>
+</html>

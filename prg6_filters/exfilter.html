@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="filterapp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filters</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="data">
+        <p>{{amount | number}}</p>
+        <p>{{amount | currency}}</p>
+        <p>{{amount | currency : 'INR '}}</p>
+        <p>{{name | uppercase}}</p>
+        <p>{{name | lowercase | limitTo:'5'}}</p>
+        <p>{{dt | date:"dd/MM/yyyy"}}</p>
+        <p>{{obj}}</p>
+        <p>{{country | filter:"d"}}</p>
+        <p>{{student | orderBy:"name"}}</p>
+        <p ng-repeat="x in student | orderBy:'name'">{{x.name}}</p>
+        <input type="number" ng-model="usn">
+        <p>{{usn | display}}</p>
+    </div>
+    <script>
+        let a = angular.module("filterapp",[]).controller("data",
+        function($scope){
+            $scope.amount = 200000
+            $scope.name = "Darshan Habib"
+            $scope.dt = new Date("12-dec-2023")
+            $scope.obj = {name : "darshan", usn : "4bd"}
+            $scope.country = ["india","canada","australia","japan"]
+            $scope.student = [{name : "Z", usn : "103"},{name : "B",usn: "101"},{name : "A",usn:"104"}]
+        })
+        .filter("display",function(){
+            return function(input){
+                if (input !== null && input !== undefined) {
+            return "4BS22IS" + input;
+        } else {
+            return ""; // or any default value you prefer
+        }
+            }
+        });
+
+    </script>
+</body>
+</html>

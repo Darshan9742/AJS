@@ -1,0 +1,27 @@
+<html ng-app="prg1">
+<head>
+    <title>Program 1</title>
+    <scipt src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></scipt>
+</head>
+<body>
+    <div ng-controller="name">
+        Enter the First Name : 
+        <input type="text" ng-model="firstTextbox"><br><br>
+        Enter the Second Name : 
+        <input type="text" ng-model="secondTextbox"><br><br>
+        <button ng-click="display()">Submit</button>
+        <h1>Full name : {{fullname}}</h1>
+    </div>
+    <script>
+        let a = angular.module("prg1",[])
+        a.controller("name",function($scope){
+            $scope.firstTextbox = "Darshan";
+            $scope.secondTextbox = "Habib";
+
+            $scope.display = function(){
+                $scope.fullname = $scope.firstTextbox+" "+$scope.secondTextbox;
+            }
+        });
+    </script>
+</body>
+</html>

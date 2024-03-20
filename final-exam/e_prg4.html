@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="shopping_list">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div class="array" ng-controller="data">
+        <table>
+            <tr ng-repeat="i in shoppingList">
+                <td>{{i}}</td>
+                <td><Button ng-click="del($index)">Remove</Button></td>
+            </tr>
+        </table>
+        Add a item : <input type="text" ng-model="item">
+        <button ng-click="add()">Add item</button><br>
+        <!-- {{shoppingList.length}} -->
+        {{length}}
+    </div>
+    <script>
+        angular.module('shopping_list',[]).controller('data',function($scope){
+            $scope.shoppingList = JSON.parse(localStorage.getItem('shoppingList')) || ['banana','apple'];
+            $scope.add = function(){
+                $scope.shoppingList.push($scope.item);
+                $scope.item=""
+                $scope.length++;
+                updatelocalstoreage();
+            }
+            
+            $scope.del = function(index){
+                $scope.shoppingList.splice(index,1);
+                $scope.length--;
+                updatelocalstoreage();
+            }
+            $scope.length = $scope.shoppingList.length;
+
+            function updatelocalstoreage(){
+                localStorage.setItem('shoppingList',JSON.stringify($scope.shoppingList));
+            }
+        })
+    </script>
+</body>
+</html>

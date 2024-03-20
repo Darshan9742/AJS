@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="calculate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="data">
+        Enter 1st number
+        <input type="number" ng-model="firstnum" required><br><br>
+        Enter 2nd number 
+        <input type="number" ng-model="secondnum" required><br><br>
+        <select ng-model="operator">
+            <option value="+">Addition</option>
+            <option value="-">Subtarct</option>
+            <option value="*">Multiply</option>
+            <option value="/">Division</option>
+        </select>
+        <button ng-click="cal()">Calculate</button>
+        <h2>{{result}}</h2>
+    </div>
+    <script>
+        angular.module('calculate',[]).controller('data',function($scope){
+            $scope.cal = function(){
+                if($scope.firstnum && $scope.secondnum != null){
+                    switch($scope.operator){
+                        case '+' : $scope.result = $scope.firstnum + $scope.secondnum;
+                        break;
+
+                        case '-' : $scope.result = $scope.firstnum - $scope.secondnum;
+                        break;
+
+                        case '*' : $scope.result = $scope.firstnum * $scope.secondnum;
+                        break;
+
+                        case '/' : if($scope.secondnum == 0){
+                            $scope.result = "Invalid";
+                                    }
+                                    else{
+                                        $scope.result = $scope.firstnum / $scope.secondnum;
+                                    }
+                                    break;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

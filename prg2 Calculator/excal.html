@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="calc">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div class="main" ng-controller="data">
+        <h2>Calculator</h2>
+        Enter 1st number : <input type="number" ng-model="num1"><br><br>
+        Enter 2nd number : <input type="number" ng-model="num2"><br><br>
+        Select the operation to be performed
+        <select ng-model="operator">
+            <option value='+'>Addition</option>
+            <option value='-'>Substraction</option>
+            <option value='*'>Multiplication</option>
+            <option value='/'>Division</option>
+        </select>
+        <button ng-click="calculate()">Submit</button>
+        <h3>Result = {{result}}</h3>
+    </div>
+    <script>
+        let a = angular.module("calc",[]).controller("data",
+        function($scope){
+            $scope.calculate = function(){
+                if($scope.num1 && $scope.num2 != null){
+                    switch($scope.operator){
+                        case '+' : $scope.result = $scope.num1 + $scope.num2;
+                                    berak;
+
+                        case '-' : $scope.result = $scope.num1 + $scope.num2;
+                        break;
+
+                        case '*' : $scope.result = $scope.num1 * $scope.num2;
+                        break;
+
+                    }
+                }
+                else{
+                    $scope.result = "Please enter values"
+                }
+            };
+        });
+    </script>
+</body>
+</html>
