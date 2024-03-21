@@ -27,6 +27,7 @@
         <li ng-repeat="x in student | orderBy:'name'">{{x.name}}</li><br>  
         <input type="number" ng-model="usn">
         <p>{{usn | display}}</p>
+        
     </div>
     <script>
         let a = angular.module("filterapp",[]).controller("filter",function($scope){

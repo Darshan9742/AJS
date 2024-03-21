@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="filters">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filters</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="data">
+        <p>{{amount | number}}</p>
+        <p>{{amount | currency:'inr '}}</p>
+        <p>{{name | lowercase}}</p>
+        <p>{{name | uppercase}}</p>
+        <p>{{name | uppercase | limitTo : '5'}}</p>
+        <p>{{dat | date:"dd/MM/yyyy"}}</p>
+        <p>{{country | filter:'c'}}</p>
+        <p>{{student | orderBy:"usn"}}</p>
+        <p>Enter usen <input type="text" ng-model="usn"></p>
+        <p>{{usn | display}}</p>
+        <p ng-repeat="x in student | orderBy:'usn'">{{x.usn}}</p>
+
+    </div>
+    <script>
+        angular.module('filters',[]).controller('data',function($scope){
+            $scope.amount = 200000;
+            $scope.name = 'Misko Hevery';
+            $scope.dat = new Date("23-jan-2024");
+            $scope.country = ['india','japan','china','austraila'];
+            $scope.student= [{name : "abc",usn:"103"},{name : "xyz",usn : "102"},{name : "op" ,usn : "101"}];
+        })
+
+        .filter('display',function(){
+            return function(usn){
+                return "4BD22IS" + usn;
+            }
+        });
+    </script>
+</body>
+</html>
