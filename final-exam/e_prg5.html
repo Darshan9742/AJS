@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="form_validation">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Form validation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
 </head>
 <body>
-    
+    <div ng-controller="data">
+        <form name="form_name" ng-submit="register()">
+            Username : <input type="text" ng-model="unm" name="u_name" ng-minlength="4" required><br><br>
+            <span ng-show="form_name.u_name.$error.minlength">
+                The username should have atlest 4 chars
+            </span>
+            Password : <input type="password" ng-model="pass" name="pswd" ng-pattern="/[a-zA-z]{4}[0-9][^a-zA-z0-9]/" required><br><br>
+            <span ng-show="form_name.pswd.$error.pattern">Should constain 4 char 1 number and 1 special char</span>
+            <button ng-disabled="form_name.$invalid">Submit</button>
+        </form>
+    </div>
+    <script>
+        angular.module('form_validation',[]).controller('data',function($scope){
+            $scope.register = function(){
+                alert('Register successfully');
+            }
+        })
+    </script>
 </body>
 </html>
