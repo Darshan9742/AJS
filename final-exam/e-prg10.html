@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="stocks">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocks</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="data">
+        <div ng-repeat="i in stocks">
+            <div newd></div>
+            <br><br>
+        </div>
+    </div>
+    <script>
+        let a = angular.module("stocks",[]).controller("data",function($scope){
+            $scope.stocks = [
+                {name : "MRF", price : "100", previous : "120"},
+                {name : "Coco-cola", price : "200", previous : "150"},
+                {name : "GTA", price : "120", previous : "120"}
+            ];
+        });
+
+        a.directive('newd',function(){
+            return {
+                templateUrl : "stock.html",
+                link:function($scope){
+                    $scope.getChange = function(stocks){
+                        return Math.ceil(((stocks.price-stocks.previous)/stocks.previous)*100)
+                    };
+                }
+            };
+        })
+    </script>
+</body>
+</html>

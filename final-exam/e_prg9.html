@@ -9,32 +9,32 @@
 </head>
 <body ng-app="routing">
     <div>
-        <h2>Routing</h2>
+        Router
         <ul>
             <li><a href="#!/">Default</a></li>
-            <li><a href="#!/ug">Ug cources</a></li>
-            <li><a href="#!/pg">Pg cources</a></li>
-            <li><a href="#!/notav">Do not exists</a></li>
+            <li><a href="#!/ug">UGcources</a></li>
+            <li><a href="#!/pg">PGcources</a></li>
+            <li><a href="#!/nan">Not available</a></li>
         </ul>
     </div>
     <div ng-view>
-    <script>
-        let a = angular.module('routing',['ngRoute'])
-        a.config(['$routeProvider',function($routeProvider){
-            $routeProvider.when("/",{template : "<h2>This Default Page</h2>"})
-            .when("/ug",{templateUrl : 'ug.html',controller : 'UGcontroller'})
-            .when("/pg",{templateUrl : 'pg.html',controller : 'PGcontroller'})
-            .otherwise({redirectTo : "/"})
-        }]);
+        <script>
+            let a = angular.module('routing',[ngRoute])
+            a.config(['$routeProvider',function($routeProvider){
+                $routeProvider.when("/",{template : "<h2>Default PAge</h2>"})
+                .when("/ug",{template : "ug.html", controller : "UGcontroller"})
+                .when("/pg",{template : "pg.html", controller : "PGcontroller"})
+                .otherwise({redirectTo : "/"})
+            }])
 
-        a.controller('UGcontroller',function($scope){
-            $scope.UGcources = ['cs','is','ai/ml']
-        });
+            a.controller("UGcontroller",function($scope){
+                $scope.UGcources = ['cs','is','ai/ml'];
+            })
 
-        a.controller('PGcontroller',function($scope){
-            $scope.PGcources = ['mba','mca','ee']
-        });
-    </script>
-</div>
+            a.controller("PGcontroller",function($scope){
+                $scope.PGcources = ['mba','mca','ee'];
+            })
+        </script>
+    </div>
 </body>
 </html>
