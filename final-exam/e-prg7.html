@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="service">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script></head>
+<body>
+    <div ng-controller="main as m">
+        <button ng-click="m.open('first')">Tab 1</button>
+        <button ng-click="m.open('second')">Tab 2</button>
+
+        <div ng-switch on="m.tab">
+            <div ng-switch-when="first" ng-controller="sub as s">
+                <h3>Tab 1</h3>
+                <li ng-repeat="item in s.list()">{{item.label}}</li>
+                <button ng-click="s.add()">Add items</button>
+            </div>
+            <div ng-switch-when="second" ng-controller="sub as s">
+                <h3>Tab 2</h3>
+                <li ng-repeat="item in s.list()">{{item.label}}</li>
+                <button ng-click="s.add()">Add items</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function Itemservice(){
+            var items = [{id : 0, label : "item 1"},{id : 1, label : "item 2"}];
+            this.list = function(){
+                return items;
+            };
+
+            this.add = function(){
+                items.push(item);
+            };
+        };
+
+        angular.module('service',[])
+        .service('Itemservice',[Itemservice])
+        .controller('main',function(){
+            this.tab = "first";
+            this.open = function(tab){
+                this.tab = tab;
+            };
+        })
+
+        .controller('sub',["Itemservice",function(Itemservice){
+            this.list = function(){
+                return Itemservice.list()
+            };
+            this.add = function(){
+                Itemservice.add({id : this.list().length+1, label : "Item" + this.list().length})
+            };
+        }]);
+    </script>
+</body>
+</html>

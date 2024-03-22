@@ -14,7 +14,7 @@
                 <input type="text" placeholder="Name" id="name" ng-model="name" required><br><br>
                 <input type="number" placeholder="Age" ng-model="age" required><br><br>
                 <input type="email" placeholder="Email" ng-model="email" required><br><br>
-                <span ng-show="f.$error.required">
+                <span ng-show="fn.$error.required">
                     Enter all the details
                 </span>
                 Add all items <button ng-disabled="fn.$invalid" ng-click="add()">Add</button>
